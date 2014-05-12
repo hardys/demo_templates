@@ -13,7 +13,7 @@
 
 Template
 --------
-_https://github.com/hardys/demo_templates/blob/master/summit_may_2014/example2/server_with_volume_nested.yaml
+_https://github.com/hardys/demo_templates/blob/master/juno_summit_intro_to_heat/example2_server_with_volume_nested/server_with_volume_nested.yaml
 
 Description
 -----------

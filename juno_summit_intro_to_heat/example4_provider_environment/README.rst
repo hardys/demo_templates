@@ -13,9 +13,10 @@
 
 Template
 --------
-_https://github.com/hardys/demo_templates/blob/master/juno_summit_intro_to_heat/example3_server_with_volume_group/server_with_volume_group.yaml
+_https://github.com/hardys/demo_templates/blob/master/juno_summit_intro_to_heat/example4_provider_environment/server_with_volume_group.yaml
 
 Description
 -----------
- This is a simple example, which demonstrates how templates can be reused when groups of identical resources are required.  It shows:
-    * How simple it is to use the ResourceGroup resource to launch multiple nested stacks
+ This is example demonstrates how to use environments:
+    * Defining parameters via the environment
+    * How to define a provider resource nested stack via the environment
