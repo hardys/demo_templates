@@ -1,0 +1,32 @@
+heat_template_version: 2013-05-23
+
+parameters:
+  key_name:
+    type: string
+    description: keypair to enable SSH access to the instance.
+
+  image_id:
+    type: string
+    description: ID of the image to use for the instance to be created.
+
+  volume_size:
+    type: number
+    description: Size of volume to attach to instance
+
+  instance_type:
+    type: string
+    description: Type of the instance to be created.
+
+resources:
+  instance:
+    type: My::Server::WithVolume
+    properties:
+        key_name: {get_param: key_name}
+        image_id: {get_param: image_id}
+        volume_size: {get_param: volume_size}
+        instance_type: {get_param: instance_type}
+
+outputs:
+    ip_address:
+        description: Assigned IP address of the instance
+        value: {get_attr: [instance, ip_address]}

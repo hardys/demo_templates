@@ -1,0 +1,8 @@
+parameters:
+  key_name: stack_key
+  image_id: cirros-0.3.3-x86_64-disk
+  volume_size: 1
+  instance_type: m1.nano
+
+resource_registry:
+  My::Server::WithVolume: server_with_volume.yaml

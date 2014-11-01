@@ -1,0 +1,51 @@
+heat_template_version: 2013-05-23
+
+parameters:
+  key_name:
+    type: string
+    constraints:
+      - custom_constraint: nova.keypair
+  flavor:
+    type: string
+    constraints:
+      - custom_constraint: nova.flavor
+  image:
+    type: string
+    constraints:
+      - custom_constraint: glance.image
+
+resources:
+  config:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      inputs:
+      - name: message
+        default: "No message"
+      config:
+        get_file: example-script.sh
+
+  deployment:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      config:
+        get_resource: config
+      server:
+        get_resource: server
+      signal_transport: HEAT_SIGNAL
+      input_values:
+        message: "Hello Paris!"
+
+  server:
+    type: OS::Nova::Server
+    properties:
+      image: {get_param: image}
+      flavor: {get_param: flavor}
+      key_name: {get_param: key_name}
+      user_data_format: SOFTWARE_CONFIG
+      software_config_transport: POLL_SERVER_HEAT
+
+outputs:
+    ip_address:
+        description: Assigned IP address of the server
+        value: {get_attr: [server, first_address]}

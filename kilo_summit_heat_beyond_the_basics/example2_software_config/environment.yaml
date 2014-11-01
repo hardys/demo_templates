@@ -1,0 +1,4 @@
+parameters:
+  key_name: stack_key
+  image: cirros-0.3.3-x86_64-disk-sc
+  flavor: m1.nano
