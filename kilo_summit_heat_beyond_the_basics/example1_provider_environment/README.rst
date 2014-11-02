@@ -11,10 +11,6 @@
       License for the specific language governing permissions and limitations
       under the License.
 
-Template
---------
-_https://github.com/hardys/demo_templates/blob/master/kilo_summit_heat_beyond_the_basics/example1_provider_environment
-
 Description
 -----------
  This is example demonstrates how to use environments:
