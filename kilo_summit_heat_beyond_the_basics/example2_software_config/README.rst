@@ -11,13 +11,13 @@
       License for the specific language governing permissions and limitations
       under the License.
 
-Template
---------
-_https://github.com/hardys/demo_templates/blob/master/kilo_summit_heat_beyond_the_basics/example2_software_config/server_with_volume_sc.yaml
-
 Description
 -----------
  This is example demonstrates how to use SoftwareConfig and SoftwareDeployment resources.
 
 You can launch the stack using the python-heatclient CLI:
     * heat stack-create example2 -f software_configured_server.yaml -e environment.yaml
+
+The cirros image referenced in the environment has been specially prepared with a minimal hook script, ref these instructions:
+
+https://github.com/openstack/heat-templates/blob/master/hot/software-config/example-templates/cirros-example/README.rst
