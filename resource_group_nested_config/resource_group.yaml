@@ -1,0 +1,18 @@
+heat_template_version: 2014-10-16
+
+resources:
+  configured_group:
+    type: OS::Heat::ResourceGroup
+    properties:
+      count: 2
+      resource_def:
+        type: example-script-template.yaml
+
+  allnodes_config:
+    type: allnodes_config_nested.yaml
+    properties:
+      servers:  {get_attr: [configured_group, attributes, nova_server_resource]}
+
+outputs:
+  servers:
+    value: {get_attr: [configured_group, attributes, nova_server_resource]}

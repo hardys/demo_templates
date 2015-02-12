@@ -1,0 +1,27 @@
+heat_template_version: 2014-10-16
+
+parameters:
+  servers:
+    type: json
+
+resources:
+  allnodes_config:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      inputs:
+      - name: foo
+      - name: bar
+      outputs:
+      - name: result
+      config:
+        get_file: config-scripts/example-script.sh
+
+  allnodes_deployment:
+    type: OS::Heat::SoftwareDeployments
+    properties:
+      config: {get_resource: allnodes_config}
+      servers:  {get_param: servers}
+      input_values:
+        foo: all1xxc
+        bar: all99xxc9
