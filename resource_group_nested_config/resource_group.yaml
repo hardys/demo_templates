@@ -6,10 +6,10 @@ resources:
     properties:
       count: 2
       resource_def:
-        type: example-script-template.yaml
+        type: My::ControllerNode
 
   allnodes_config:
-    type: allnodes_config_nested.yaml
+    type: My::AllNodesConfig
     properties:
       servers:  {get_attr: [configured_group, attributes, nova_server_resource]}
 

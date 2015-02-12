@@ -1,0 +1,45 @@
+heat_template_version: 2014-10-16
+
+parameters:
+  server:
+    type: string
+
+resources:
+  config:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      inputs:
+      - name: foo
+      - name: bar
+      outputs:
+      - name: result
+      config:
+        get_file: config-scripts/example-script.sh
+
+  deployment:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      config:
+        get_resource: config
+      server:
+        get_param: server
+      input_values:
+        foo: fooooo
+        bar: baaaaa
+
+  other_deployment:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      config:
+        get_resource: config
+      server:
+        get_param: server
+      input_values:
+        foo: fu
+        bar: barmy
+      actions:
+      - CREATE
+      - UPDATE
+      - SUSPEND
+      - RESUME

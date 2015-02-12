@@ -1,0 +1,10 @@
+resource_registry:
+  My::ControllerNode: my_node.yaml
+  My::NodeConfig: my_node_config.yaml
+  My::AllNodesConfig: allnodes_config_nested.yaml
+
+parameter_defaults:
+  flavor: m1.small
+  image: heat-functional-tests-image
+  key_name: default
+

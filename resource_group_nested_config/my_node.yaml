@@ -1,0 +1,28 @@
+heat_template_version: 2014-10-16
+parameters:
+  key_name:
+    type: string
+  flavor:
+    type: string
+  image:
+    type: string
+
+resources:
+  config:
+    type: My::NodeConfig
+    properties:
+      server:
+        get_resource: server
+
+  server:
+    type: OS::Nova::Server
+    properties:
+      image: {get_param: image}
+      flavor: {get_param: flavor}
+      key_name: {get_param: key_name}
+      user_data_format: SOFTWARE_CONFIG
+
+outputs:
+  nova_server_resource:
+    value:
+      get_resource: server
