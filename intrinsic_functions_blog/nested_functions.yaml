@@ -1,0 +1,49 @@
+heat_template_version: 2016-10-14
+
+description: >
+  Example of nested heat functions
+
+parameters:
+  NetIpMap:
+    type: json
+    default:
+      internal_api: 192.168.1.12
+      storage: 192.168.1.13
+      
+  EnabledServices:
+    type: comma_delimited_list
+    default:
+      - heat_api
+      - nova_api
+      - neutron_api
+      - glance_api
+      - ceph_mon
+
+  ServiceNetMap:
+    type: json
+    default:
+      heat_api_network: internal_api
+      nova_api_network: internal_api
+      neutron_api_network: internal_api
+      glance_api_network: storage
+      ceph_mon_network: storage
+
+
+outputs:
+  service_ip_map:
+    description: Mapping of service names to IP address for the assigned network
+    value:
+      yaql:
+        expression: dict($.data.map.items().where(isString($[1]) and not $[1].endsWith("_network")))
+        data:
+          map:
+            map_replace:
+              - map_replace:
+                  - map_merge:
+                      repeat:
+                        template:
+                          SERVICE_ip: SERVICE_network
+                        for_each:
+                          SERVICE: {get_param: EnabledServices}
+                  - values: {get_param: ServiceNetMap}
+              - values: {get_param: NetIpMap}
